@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Nothing else is ignored, on purpose.
+#
+# Your identity.md, your laws and your handoff are the point. They are meant to
+# be committed — versioned, diffable, restorable. An identity you cannot roll
+# back is one bad edit away from gone.
+#
+# If yours is personal: copy this repo rather than forking it, and make your
+# copy private. Do not add your own files here to hide them from a fork you did
+# not need to make.
