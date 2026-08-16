@@ -20,7 +20,7 @@ flowchart LR
     A["identity.md<br/><i>who this is</i>"] --> B(["boot.py"])
     C["laws/<br/><i>what it learned<br/>by being wrong</i>"] --> B
     D["handoff.md<br/><i>what happened<br/>last time</i>"] --> B
-    B -- "prints one block<br/>you paste anywhere" --> E{{"any model"}}
+    B -- "prints one block<br/>you paste it in" --> E{{"your model"}}
     E -- "the session" --> F(["save.py"])
     F -- "writes it down" --> C
     F -- "newest on top" --> D
@@ -98,8 +98,13 @@ not an identity — it is a configuration file. The point of putting it in files
 is that the files outlive the runtime, so the loader must not depend on the
 runtime either.
 
-Practically: this works with a hosted assistant, a local model, an agent
-framework, or a chat window. It will still work with whatever replaces them.
+What that buys is a property, not a coverage list: there is nothing here that
+can stop working when a vendor changes an API, because nothing here calls one.
+
+Be precise about what that is and is not. It is a claim about the design. It is
+not a claim that this has been tested against a list of runtimes, because it has
+not. If you need to know it works with yours, the test takes sixty seconds and
+you are better placed to run it than I am.
 
 ## The one rule worth arguing about
 
