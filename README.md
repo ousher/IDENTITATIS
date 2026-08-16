@@ -1,8 +1,37 @@
-# identitatis
+<p align="center">
+  <img src="assets/banner.svg" alt="IDENTITATIS — not what your agent knows, who it is" width="100%">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-c8322b?style=flat-square" alt="MIT">
+  <img src="https://img.shields.io/badge/dependencies-none-4a463f?style=flat-square" alt="no dependencies">
+  <img src="https://img.shields.io/badge/python-3.8%2B-4a463f?style=flat-square" alt="python 3.8+">
+  <img src="https://img.shields.io/badge/runtime-any-e2622f?style=flat-square" alt="any runtime">
+</p>
+
+# IDENTITATIS
 
 **The file layer where an agent's identity lives.**
 
 Not what it knows. Who it is.
+
+```mermaid
+flowchart LR
+    A["identity.md<br/><i>who this is</i>"] --> B(["boot.py"])
+    C["laws/<br/><i>what it learned<br/>by being wrong</i>"] --> B
+    D["handoff.md<br/><i>what happened<br/>last time</i>"] --> B
+    B -- "prints one block<br/>you paste anywhere" --> E{{"any model"}}
+    E -- "the session" --> F(["save.py"])
+    F -- "writes it down" --> C
+    F -- "newest on top" --> D
+
+    style B fill:#c8322b,stroke:#c8322b,color:#fff
+    style F fill:#c8322b,stroke:#c8322b,color:#fff
+    style E fill:#0a0a0c,stroke:#e2622f,color:#e8e2d8
+```
+
+The loop is the whole product. Everything else in this repo is a detail of one
+of those six boxes.
 
 ---
 
