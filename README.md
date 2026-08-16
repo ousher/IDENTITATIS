@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/license-MIT-c8322b?style=flat-square" alt="MIT">
   <img src="https://img.shields.io/badge/dependencies-none-4a463f?style=flat-square" alt="no dependencies">
   <img src="https://img.shields.io/badge/python-3.8%2B-4a463f?style=flat-square" alt="python 3.8+">
-  <img src="https://img.shields.io/badge/runtime-any-e2622f?style=flat-square" alt="any runtime">
+  <img src="https://img.shields.io/badge/runtime-none%20required-e2622f?style=flat-square" alt="no runtime required">
 </p>
 
 # IDENTITATIS
