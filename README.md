@@ -243,6 +243,59 @@ worded three months ago is the day you will wish you had the history.
 If yours is personal, copy this repo rather than forking it, and make your copy
 private.
 
+## What you save becomes what it is
+
+This is the one security property worth understanding before you use this.
+
+`boot.py` loads your identity, your laws and your handoff into a single block
+that arrives **before the first word of the next session**. That is the feature.
+It also means the write path is the only real boundary in the system: anything
+that gets into those files becomes behaviour, silently, from then on.
+
+So the rule is about `save.py`, not about `boot.py`:
+
+> **Do not save text you did not write.** Not a model's summary of itself, not a
+> pasted email, not scraped output, not a transcript from something you do not
+> control — at least not verbatim, and never as a law.
+
+Text you paste into a session is input, and you read it as input. The same text
+saved into `laws/` is read next time as **who you are**, by a reader with no way
+to tell the two apart. That promotion is the whole risk, and it happens at the
+moment you save, not the moment you paste.
+
+Two habits cover most of it:
+
+- **Summarise in your own words.** `python save.py "..."` takes what *you* say
+  happened. If you find yourself pasting a block you did not write, stop.
+- **Laws are hand-written, always.** `--law` needs a `--why`, and the reason
+  should be something that happened to you. That requirement is not only about
+  re-evaluation; a law you have to justify is a law you have to have read.
+
+If you want a record of something untrusted — the phishing email, the weird
+model output — put it in a file of your own next to the identity, and reference
+it. Do not put it in the packet. The parts that boot are the parts that are you.
+
+## Tests
+
+```bash
+python test.py
+```
+
+No dependencies, no framework. Runs against a throwaway copy in a temp
+directory, never against your identity.
+
+It tests the claims rather than the code: that two saves in the same second
+both survive, that a law is never overwritten, that `--law` refuses an empty
+reason, that everything runs on a cp1252 console, and that a missing identity
+produces a sentence instead of a traceback.
+
+Each of those exists because it was broken. The first public commit named
+session files to the minute and wrote them unconditionally — so two saves in
+one minute destroyed the first record while the handoff kept both summaries,
+which is precisely the failure this design claims to prevent. It also crashed
+on a default Windows console. Both were found by an outside reviewer running it
+on a machine unlike the one it was written on.
+
 ## Known holes
 
 - No multi-user story. One person, one identity.
@@ -250,8 +303,14 @@ private.
   window, you will need to decide what stays hot. That decision is yours and
   this repo does not make it for you.
 - No validation that what you wrote is any good. It will happily store a bad law
-  forever.
+  forever, and it cannot tell a law you learned from one you pasted. See the
+  trust boundary above — that check is yours, and it is not automatable here.
 - Sessions are never pruned. The folder grows.
+- Run against CPython 3.12 on Windows 11. That is the whole tested surface. The
+  suite forces a cp1252 console on every platform, so the encoding case is
+  covered anywhere you run it — but "works on 3.8", "works on macOS" and "works
+  on Linux" are design claims, not results. If you need one of them, the suite
+  is one command and you are better placed to run it than I am.
 
 ## Licence
 

@@ -38,6 +38,27 @@ ORDER = [
 ]
 
 
+def _console():
+    """Make stdout able to carry the characters this tool prints.
+
+    Not a cosmetic fix. The severity markers below are IN THE PACKET — they are
+    how the loader tells the model what to read first — so on a default Windows
+    console, where Python still picks cp1252, `python boot.py` did not print a
+    degraded packet. It raised UnicodeEncodeError and printed nothing at all.
+    The primary command of the tool failed on the most common desktop OS, and it
+    took an outside reviewer on a Windows box to find it, because everyone who
+    had run it so far ran it on a UTF-8 terminal.
+
+    Output encoding is part of the interface. The machine you develop on does
+    not test it.
+    """
+    for s in (sys.stdout, sys.stderr):
+        try:
+            s.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):     # pre-3.7, or an odd stream
+            pass
+
+
 def _read(p):
     """Read a file for the boot packet, minus the scaffolding.
 
@@ -188,6 +209,7 @@ def packet():
 
 
 def main():
+    _console()
     if "--check" in sys.argv:
         return check()
     text = packet()
